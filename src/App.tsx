@@ -1,17 +1,18 @@
 /** @format */
 
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Grid } from "./components/grid";
+import React from 'react';
+import { Provider } from 'react-redux';
+import './App.css';
+import Grid from './components/grid/index';
+import { store } from './redux/store/store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Grid id="01" />
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Grid />
+      </div>
+    </Provider>
   );
 }
 
