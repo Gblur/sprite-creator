@@ -1,9 +1,7 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Action } from 'redux';
 import gridGenerate from '../../functions/generate';
-import { Rootstate } from '../store/store';
 import { ITile } from '../../interfaces/Tile';
-import Tile from '../../components/tile';
 
 interface Board {
   tiles: ITile[];
