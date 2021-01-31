@@ -4,7 +4,7 @@ const gridGenerate = (size: number): ITile[] => {
   const tiles = [];
   for (let i = 0; i < size; i++) {
     const data = {
-      id: i,
+      id: i.toString(),
       color: 'white',
       hasColor: false,
     };

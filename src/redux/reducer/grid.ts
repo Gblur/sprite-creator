@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Action } from 'redux';
+import { isTemplateExpression } from 'typescript';
 import gridGenerate from '../../functions/generate';
 import { ITile } from '../../interfaces/Tile';
 
@@ -10,25 +11,29 @@ const intialState: Board = {
   tiles: [],
 };
 
-// const SETCOLOR = 'grid/setColor';
-// type SetColorAction = Action<typeof SETCOLOR>;
-// export const SetColor = (payload): SetColorAction => ({
-//     color: payload;
-// })
+const SETCOLOR = 'grid/SetColor';
+type SetColorAction = Action<typeof SETCOLOR>;
+interface combineSetColor extends SetColorAction {
+  payload: string;
+}
+export const SetColorAction = (id: string): combineSetColor => ({
+  type: SETCOLOR,
+  payload: id ,
+});
 
 const SETTILES = 'grid/setTiles';
 type SetTilesAction = Action<typeof SETTILES>;
-interface combineTilesParam extends SetTilesAction {
+interface combineSetTiles extends SetTilesAction {
   payload: number;
 }
-export const SetTiles = (event: number): combineTilesParam => ({
+export const SetTilesAction = (amount: number): combineSetTiles => ({
   type: SETTILES,
-  payload: event,
+  payload: amount,
 });
 
 const BoardReducer = (
   state: Board = intialState,
-  action: combineTilesParam
+  action: combineSetTiles | combineSetColor
 ) => {
   switch (action.type) {
     case SETTILES: {
@@ -39,6 +44,14 @@ const BoardReducer = (
         tiles: tiles,
       };
     }
+    case SETCOLOR:{
+      const color = action.payload;
+      const tiles = state.tiles.map(item => color === item.id ? {...item, hasColor: true} : item )
+      return {
+        ...state,
+        tiles: tiles
+      }
+    } 
     default:
       return state;
   }
