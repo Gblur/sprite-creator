@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Rootstate } from '../../redux/store/store';
 import { TileDiv } from '../tile/tile';
-import { SetColorAction, SetTilesAction } from '../../redux/reducer/grid';
+import { SetColorAction, setTilesAction } from '../../redux/reducer/grid';
 import { ITile } from '../../interfaces/Tile';
 import styled from 'styled-components';
 
@@ -39,27 +39,27 @@ const Container = styled.span`
 
 const Grid: FC = () => {
   const dispatch = useDispatch();
-  const [tile, settile] = useState(64);
-  const [color, setColor] = useState('black');
+  const [inputTile, setInputTile] = useState(64);
+  const [inputColor, setInputColor] = useState('black');
 
   const tiles = useSelector<Rootstate, ITile[]>((state) => state.board.tiles);
 
   useEffect(() => {
-    dispatch(SetTilesAction(tile));
-  }, [tile]);
+    dispatch(setTilesAction(inputTile));
+  }, [inputTile]);
 
-  const handleTileState = (tileId: string) => {
-    dispatch(SetColorAction(tileId));
+  const handleTileState = (tileId: string, color: string) => {
+    dispatch(SetColorAction(tileId, color));
   };
 
   const handleTileStateChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    return settile(parseInt(event.currentTarget.value));
+    return setInputTile(parseInt(event.currentTarget.value));
   };
 
   const handleColorState = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setColor(event.currentTarget.value);
+    setInputColor(event.currentTarget.value);
   };
 
   // const colorRange = (start: number, end: number, length = end - start + 1) => {
@@ -72,11 +72,15 @@ const Grid: FC = () => {
     <div className="board">
       <div className="form">
         <Container>
-          <input type="number" onChange={handleTileStateChange} value={tile} />
+          <input
+            type="number"
+            onChange={handleTileStateChange}
+            value={inputTile}
+          />
         </Container>
         <Container>
-          <input type="color" value={color} onChange={handleColorState} />
-          <input type="text" value={color} />
+          <input type="color" value={inputColor} onChange={handleColorState} />
+          <input type="text" value={inputColor} />
         </Container>
       </div>
       <div className="grid">
@@ -85,8 +89,8 @@ const Grid: FC = () => {
             <TileDiv
               key={item.id}
               id={item.id}
-              color={item.hasColor ? color : 'white'}
-              onClick={() => handleTileState(item.id)}
+              color={item.color}
+              onClick={() => handleTileState(item.id, inputColor)}
               hasColor={item.hasColor}
             />
           );

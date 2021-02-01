@@ -5,5 +5,5 @@ export const TileDiv = styled.div<ITile>`
   background: ${(props) => props.color};
   width: 10vh;
   height: 10vh;
-  border: 2px solid black;
+  outline: 2px solid black;
 `;
