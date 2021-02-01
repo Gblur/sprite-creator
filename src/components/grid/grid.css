@@ -1,11 +1,54 @@
 .board {
   display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  padding: 50px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 }
+
+.form {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-between;
+}
+
+/* .palette {
+  display: flex;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* .color-1 {
+  background: blue;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+}
+
+.color-2 {
+  background: red;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+}
+.color-3 {
+  background: yellow;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+}
+.color-4 {
+  background: green;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+} */
