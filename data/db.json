@@ -1,3 +1,10 @@
 {
-  "user": []
+  "users": [
+    {
+      "firstName": "Florian",
+      "lastName": "Gaebler",
+      "email": "floriangaebler@gmail.com",
+      "password": "testString"
+    }
+  ]
 }

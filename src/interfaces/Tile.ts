@@ -1,5 +1,6 @@
 export interface ITile {
   id: string;
   color: string;
-  hasColor: boolean;
+  width?: number;
+  height?: number;
 }

@@ -1,15 +1,22 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { stringify } from 'querystring';
 import { Action } from 'redux';
 import gridGenerate from '../../functions/generate';
 import { ITile } from '../../interfaces/Tile';
 
-interface Board {
+export interface Board {
   tiles: ITile[];
 }
 const intialState: Board = {
   tiles: [],
 };
+
+// const defaultState = () => {
+//   const serializedState = localStorage.getItem('tiles');
+//   if (serializedState === null) {
+//     return undefined;
+//   }
+//   return JSON.parse(serializedState) || intialState;
+// };
 
 const SETCOLOR = 'grid/SetColor';
 type SetColorAction = Action<typeof SETCOLOR>;
@@ -72,4 +79,4 @@ const BoardReducer = (
   }
 };
 
-export default BoardReducer;
+export { BoardReducer };
